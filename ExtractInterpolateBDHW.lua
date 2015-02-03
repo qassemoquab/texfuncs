@@ -23,7 +23,8 @@ It only works in BATCH MODE (4D) with RGB inputs :
 The module doesn't require fixed-size inputs.]]
 
 function ExtractInterpolate:__init()
-   parent.__init(self)
+    parent.__init(self)
+    self.train = true
 
     self.gradInput=torch.Tensor(1)
     self.cudaArray=nil

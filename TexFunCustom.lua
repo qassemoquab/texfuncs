@@ -57,14 +57,14 @@ function TexFunCustom.exampleFn(input)
    local x1 = 1 + math.random(0, xcrop)
    local y1 = 1 + math.random(0, ycrop)
    
-   local x2 = input:size(3) - math.random(0, xcrop)
+   local x2 = wInput - math.random(0, xcrop)
    local y2 = 1 + math.random(0, ycrop)
    
-   local x3 = input:size(3) - math.random(0, xcrop)
-   local y3 = input:size(2) - math.random(0, ycrop)
+   local x3 = wInput - math.random(0, xcrop)
+   local y3 = hInput - math.random(0, ycrop)
    
    local x4 = 1 + math.random(0, xcrop)
-   local y4 = input:size(2) - math.random(0, ycrop)
+   local y4 = hInput - math.random(0, ycrop)
    
    local flip = torch.bernoulli(0.5)
    
