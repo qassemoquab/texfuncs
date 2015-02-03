@@ -39,31 +39,27 @@ function TexFunCropJitter:updateOutput(input)
       ycrop = math.floor(self.cropy/2)
    end
 
+   local wInput = input:size(4)
+   local hInput = input:size(3)
+
+
    if input:type() == 'torch.CudaTensor' then
       local x1=xcrop
       local y1=ycrop
       
-      local x2=input:size(3)-self.cropx+xcrop
+      local x2=wInput-self.cropx+xcrop
       local y2=ycrop
       
-      local x3=input:size(3)-self.cropx+xcrop
-      local y3=input:size(2)-self.cropy+ycrop
+      local x3=wInput-self.cropx+xcrop
+      local y3=hInput-self.cropy+ycrop
 
       local x4=xcrop
-      local y4=input:size(2)-self.cropy+ycrop
+      local y4=hInput-self.cropy+ycrop
 
-      local targety = input:size(2)-self.cropy
-      local targetx = input:size(3)-self.cropx
+      local targety = hInput-self.cropy
+      local targetx = wInput-self.cropx
       
       self:updateOutputCall(input, targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4)
-   else
-   -- y u no gpu
-      self.xcrop=self.cropx
-      self.ycrop=self.cropy
-      self.xstart=xcrop+1
-      self.ystart=ycrop+1
-      self.randflip=0 -- this is a residual of CPU nxn.Jitter()
-      input.nxn.Jitter_updateOutput(self, input)      
    end   
    return self.output
 end

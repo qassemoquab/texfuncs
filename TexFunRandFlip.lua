@@ -31,34 +31,30 @@ function TexFunRandFlip:updateOutput(input)
    else
       flip=0
    end
+
+   local wInput = input:size(4)
+   local hInput = input:size(3)
    
    if flip==0 then
       self.output:resizeAs(input):copy(input)
    else
       if input:type() == 'torch.CudaTensor' then
-         local x1=input:size(3)
-         local y1=1
+         local x1 = wInput
+         local y1 = 1
          
-         local x2=1
-         local y2=1
+         local x2 = 1
+         local y2 = 1
          
-         local x3=1
-         local y3=input:size(2)
+         local x3 = 1
+         local y3 = hInput
 
-         local x4=input:size(3)
-         local y4=input:size(2)
+         local x4 = wInput
+         local y4 = hInput
 
-         local targety = input:size(2)
-         local targetx = input:size(3)
+         local targety = hInput
+         local targetx = wInput
          
          self:updateOutputCall(input, targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4)
-      else
-         self.xcrop=0 -- this is a residual of CPU nxn.Jitter()
-         self.ycrop=0 -- this is a residual of CPU nxn.Jitter()
-         self.xstart=self.xcrop+1 -- this is a residual of CPU nxn.Jitter()
-         self.ystart=self.ycrop+1 -- this is a residual of CPU nxn.Jitter()
-         self.randflip=flip
-         input.nxn.Jitter_updateOutput(self, input)      
       end
    end
 

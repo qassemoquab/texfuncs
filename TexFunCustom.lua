@@ -44,12 +44,15 @@ function TexFunCustom:updateOutput(input)
 end
 
 function TexFunCustom.exampleFn(input)
+   local wInput = input:size(4)
+   local hInput = input:size(3)
+    
    local scale = torch.uniform(0.8,1.2)
-   local targety = scale * input:size(2)
-   local targetx = scale * input:size(3)
+   local targety = scale * hInput
+   local targetx = scale * wInput
    
-   local xcrop = math.floor(input:size(3) * 0.1)
-   local ycrop = math.floor(input:size(2) * 0.1)
+   local xcrop = math.floor(hInput * 0.1)
+   local ycrop = math.floor(wInput * 0.1)
 
    local x1 = 1 + math.random(0, xcrop)
    local y1 = 1 + math.random(0, ycrop)
@@ -74,16 +77,19 @@ end
 
 
 function TexFunCustom.exampleFnTest(input)
-   local targety = input:size(2)
-   local targetx = input:size(3)
+   local wInput = input:size(4)
+   local hInput = input:size(3)
+
+   local targety = hInput
+   local targetx = wInput
    local x1 = 1
    local y1 = 1
-   local x2 = input:size(3)
+   local x2 = wInput
    local y2 = 1
-   local x3 = input:size(3)
-   local y3 = input:size(2)
+   local x3 = wInput
+   local y3 = hInput
    local x4 = 1
-   local y4 = input:size(2)
+   local y4 = hInput
    return targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4
 end
 
