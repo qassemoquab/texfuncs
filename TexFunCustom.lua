@@ -25,7 +25,7 @@ function TexFunCustom:setFunc(fn, fntest)
       self.fn=fn
       self.fnTest=fntest or self.exampleFnTest
    else
-      print('TexFunCustom:setFunc(fn[, fntest]) or TexFunCustom(fn[, fntest]) where : targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 = fn(input)')
+      print('TexFunCustom:setFunc(fn[, fntest]) or TexFunCustom(fn[, fntest]) where : targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 = self:fn(input)')
       print('using default fn (it does scale jitter [0.8, 1.2], 50% flip, 10% deformation jittering)')
       self.fn=self.exampleFn
       self.fnTest=self.exampleFnTest
@@ -35,15 +35,15 @@ end
 function TexFunCustom:updateOutput(input)
    local targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 
    if self.train then 
-      targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 = self.fn(input)
+      targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 = self:fn(input)
    else
-      targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 = self.fnTest(input)
+      targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4 = self:fnTest(input)
    end
    self:updateOutputCall(input, targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4)
    return self.output
 end
 
-function TexFunCustom.exampleFn(input)
+function TexFunCustom:exampleFn(input)
    local wInput = input:size(4)
    local hInput = input:size(3)
     
@@ -76,7 +76,7 @@ function TexFunCustom.exampleFn(input)
 end
 
 
-function TexFunCustom.exampleFnTest(input)
+function TexFunCustom:exampleFnTest(input)
    local wInput = input:size(4)
    local hInput = input:size(3)
 

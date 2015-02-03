@@ -1,6 +1,6 @@
 local TexFunDeformation, parent = torch.class('nn.TexFunDeformation', 'nn.TexFunCustom')
 
-local function fnTrain(input)
+local function fnTrain(self, input)
    local wInput = input:size(4)
    local hInput = input:size(3)
     
@@ -32,7 +32,7 @@ local function fnTrain(input)
 end
 
 
-local function fnTest(input)
+local function fnTest(self, input)
    local wInput = input:size(4)
    local hInput = input:size(3)
 
