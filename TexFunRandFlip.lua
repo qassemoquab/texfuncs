@@ -1,4 +1,4 @@
-local TexFunRandFlip, parent = torch.class('nn.TexFunRandFlip', 'nn.ExtractInterpolate')
+local TexFunRandFlip, parent = torch.class('nn.TexFunRandFlip', 'nn.ExtractInterpolateBDHW')
 
 local help_str = 
 [[Horizontally flips an input RGB image flipprob% of the time. Based on ExtractInterpolate.

@@ -1,8 +1,8 @@
-package = "nnbhwdtexfuncs"
+package = "texfuncs"
 version = "scm-1"
 
 source = {
-   url = "git://github.com/qassemoquab/nnbhwdtexfuncs",
+   url = "git://github.com/qassemoquab/texfuncs",
    tag = "master"
 }
 
@@ -11,7 +11,7 @@ description = {
    detailed = [[
    	    Texture-based functions
    ]],
-   homepage = "https://github.com/qassemoquab/nnbhwdtexfuncs"
+   homepage = "https://github.com/qassemoquab/texfuncs"
 }
 
 dependencies = {

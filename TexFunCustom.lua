@@ -1,4 +1,4 @@
-local TexFunCustom, parent = torch.class('nn.TexFunCustom', 'nn.ExtractInterpolate')
+local TexFunCustom, parent = torch.class('nn.TexFunCustom', 'nn.ExtractInterpolateBDHW')
 
 local help_str = 
 [[Custom version of ExtractInterpolate, where user should specify :

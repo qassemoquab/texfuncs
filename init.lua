@@ -1,14 +1,14 @@
 require "torch"
 require "cunn"
-require "libnnbhwdtexfuncs"
+require "libtexfuncs"
 
-local nnbhwdtexfuncs = {}
+local texfuncs = {}
 
-nnbhwdtexfuncs.ExtractInterpolateBDHW = require 'nnbhwdtexfuncs.ExtractInterpolateBDHW'
-nnbhwdtexfuncs.TexFunRandResize = require 'nnbhwdtexfuncs.TexFunRandResize'
-nnbhwdtexfuncs.TexFunRandFlip = require 'nnbhwdtexfuncs.TexFunRandFlip'
-nnbhwdtexfuncs.TexFunFixedResize = require 'nnbhwdtexfuncs.TexFunFixedResize'
-nnbhwdtexfuncs.TexFunCustom = require 'nnbhwdtexfuncs.TexFunCustom'
-nnbhwdtexfuncs.TexFunCropJitter = require 'nnbhwdtexfuncs.TexFunCropJitter'
+texfuncs.ExtractInterpolateBDHW = require 'texfuncs.ExtractInterpolateBDHW'
+texfuncs.TexFunRandResize = require 'texfuncs.TexFunRandResize'
+texfuncs.TexFunRandFlip = require 'texfuncs.TexFunRandFlip'
+texfuncs.TexFunFixedResize = require 'texfuncs.TexFunFixedResize'
+texfuncs.TexFunCustom = require 'texfuncs.TexFunCustom'
+texfuncs.TexFunCropJitter = require 'texfuncs.TexFunCropJitter'
 
-return nnbhwdtexfuncs
+return texfuncs

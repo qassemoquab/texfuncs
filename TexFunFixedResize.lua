@@ -1,4 +1,4 @@
-local TexFunFixedResize, parent = torch.class('nn.TexFunFixedResize', 'nn.ExtractInterpolate')
+local TexFunFixedResize, parent = torch.class('nn.TexFunFixedResize', 'nn.ExtractInterpolateBDHW')
 
 local help_str = 
 [[Resizes an input RGB image by a fixed scale. Based on ExtractInterpolate.

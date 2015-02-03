@@ -1,4 +1,4 @@
-local TexFunRandResize, parent = torch.class('nn.TexFunRandResize', 'nn.ExtractInterpolate')
+local TexFunRandResize, parent = torch.class('nn.TexFunRandResize', 'nn.ExtractInterpolateBDHW')
 
 local help_str = 
 [[Resizes an image by a random factor uniformly sampled in (scale1,scale2). Based on ExtractInterpolate.

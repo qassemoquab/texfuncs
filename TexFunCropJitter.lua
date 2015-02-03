@@ -1,4 +1,4 @@
-local TexFunCropJitter, parent = torch.class('nn.TexFunCropJitter', 'nn.ExtractInterpolate')
+local TexFunCropJitter, parent = torch.class('nn.TexFunCropJitter', 'nn.ExtractInterpolateBDHW')
 
 local help_str = 
 [[Crops (cropx, cropy) pixels from the borders of an image. Based on ExtractInterpolate.
