@@ -6,6 +6,7 @@
     };
 #endif
 
+#include "utils.h"
 
 static texture<float, cudaTextureType2DLayered> texRef2;
 
@@ -42,6 +43,7 @@ __global__ void extractInterpolateBDHWKernel(float* outptr, int outstr0, int out
 
 static int texfuncs_ExtractInterpolate_updateOutput(lua_State *L)
 {
+  THCState *state = getCutorchState(L);
   THCudaTensor *input = (THCudaTensor *)luaT_checkudata(L, 2, "torch.CudaTensor");
   THCudaTensor *output = (THCudaTensor *)luaT_getfieldcheckudata(L, 1, "output", "torch.CudaTensor");
   cudaArray* imgarray = (cudaArray *) lua_touserdata(L, 3);
@@ -57,15 +59,15 @@ static int texfuncs_ExtractInterpolate_updateOutput(lua_State *L)
   int x3int = luaT_getfieldcheckint(L, 1, "x3");
   int x4int = luaT_getfieldcheckint(L, 1, "x4");
 
-  input = THCudaTensor_newContiguous(input); // should be contiguous already
+  input = THCudaTensor_newContiguous(state, input); // should be contiguous already
   
   int bs       = input->size[0];
   int nPlanes  = input->size[1];
   int ih       = input->size[2];
   int iw       = input->size[3];
-  assert(nPlanes==3);
+//  assert(nPlanes==3);
 
-  THCudaTensor_resize4d(output, bs, nPlanes,  outy, outx);
+  THCudaTensor_resize4d(state, output, bs, nPlanes,  outy, outx);
   
   float y1 = ((float)y1int-1)/(float)(ih-1);
   float y2 = ((float)y2int-1)/(float)(ih-1);
@@ -80,7 +82,7 @@ static int texfuncs_ExtractInterpolate_updateOutput(lua_State *L)
   cudaError_t result;
   cudaError_t err;
 
-  float * outptr=THCudaTensor_data(output);
+  float * outptr=THCudaTensor_data(state, output);
   
     texRef2.addressMode[0]   = cudaAddressModeBorder;
     texRef2.addressMode[1]   = cudaAddressModeBorder;
@@ -120,7 +122,7 @@ static int texfuncs_ExtractInterpolate_updateOutput(lua_State *L)
   }
  
   // final cut:
-  THCudaTensor_free(input); 
+  THCudaTensor_free(state, input); 
   //THCudaTensor_free(tmp); 
   //THCudaTensor_select(output, NULL, dimension, 0);
 
@@ -139,7 +141,7 @@ static int texfuncs_ExtractInterpolate_initCudaArray(lua_State *L)
     int nPlanes  = input->size[1];
     int ih       = input->size[2];
     int iw       = input->size[3];
-    assert(nPlanes==3);
+//    assert(nPlanes==3);
  
     cudaExtent ex = make_cudaExtent(iw, ih, bs*nPlanes);
 
@@ -158,7 +160,7 @@ static int texfuncs_ExtractInterpolate_initCudaArray(lua_State *L)
 
 static int texfuncs_ExtractInterpolate_copyIntoArray(lua_State *L)
 {
-//    THCState *state = getCutorchState(L);
+    THCState *state = getCutorchState(L);
     THCudaTensor *input = (THCudaTensor *)luaT_checkudata(L, 2, "torch.CudaTensor");
     cudaArray* imgarray = (cudaArray *) lua_touserdata(L, 3);
 
@@ -166,7 +168,7 @@ static int texfuncs_ExtractInterpolate_copyIntoArray(lua_State *L)
     int nPlanes  = input->size[1];
     int ih       = input->size[2];
     int iw       = input->size[3];
-    assert(nPlanes==3);
+//    assert(nPlanes==3);
 
     cudaError_t result;
 
@@ -174,7 +176,7 @@ static int texfuncs_ExtractInterpolate_copyIntoArray(lua_State *L)
     memset(&myParms, 0, sizeof(myParms));
     myParms.srcPtr.pitch = sizeof(float) * iw;
 //    myParms.srcPtr.ptr = THCudaTensor_data(state, input);
-    myParms.srcPtr.ptr = THCudaTensor_data(input);
+    myParms.srcPtr.ptr = THCudaTensor_data(state, input);
     myParms.srcPtr.xsize = iw;
     myParms.srcPtr.ysize = ih;
 

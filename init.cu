@@ -7,6 +7,8 @@
 #include <thrust/transform_reduce.h>
 #include <thrust/functional.h>
 #include <thrust/device_ptr.h>
+#include "utils.c"
+
 
 #include "ExtractInterpolateBDHW.cu"
 

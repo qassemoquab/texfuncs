@@ -10,6 +10,7 @@ texfuncs.TexFunRandFlip = require 'texfuncs.TexFunRandFlip'
 texfuncs.TexFunFixedResize = require 'texfuncs.TexFunFixedResize'
 texfuncs.TexFunCustom = require 'texfuncs.TexFunCustom'
 texfuncs.TexFunCropJitter = require 'texfuncs.TexFunCropJitter'
+texfuncs.TexFunCropFlip = require 'texfuncs.TexFunCropFlip'
 texfuncs.TexFunDeformation = require 'texfuncs.TexFunDeformation'
 
 return texfuncs
