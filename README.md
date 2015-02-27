@@ -6,7 +6,7 @@ Texture-based functions for BDHW layout
 
 Test with : 
 
-[code]
+```lua
 
 require 'texfuncs'
 require 'sys'
@@ -30,4 +30,5 @@ for i=1,100 do
    print(sys.toc())
 end
 
-[/code]
+
+```
