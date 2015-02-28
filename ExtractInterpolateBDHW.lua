@@ -16,9 +16,9 @@ y3,x3 = input pixel corresponding to bottom right corner of output
 y4,x4 = input pixel corresponding to bottom left corner of output
 
 It only works in BATCH MODE (4D) with RGB inputs :
-- with the following input layout : (batch, y, x, RGB).
+- with the following input layout : (batch, RGB, y, x).
 - RGB are the contiguous dimension.
-- a single image must be a (1, y, x, RGB) tensor.
+- a single image must be a (1, RGB, y, x) tensor.
 
 The module doesn't require fixed-size inputs.]]
 
