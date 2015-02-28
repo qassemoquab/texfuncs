@@ -25,9 +25,11 @@ w=image.display(ei.output)
 
 for i=1,100 do
    sys.tic()
+   cutorch.synchronize()
    ei:updateOutput(input)
-   image.display({image = ei.output, win = w})
+   cutorch.synchronize()
    print(sys.toc())
+   image.display({image = ei.output, win = w})
 end
 
 
