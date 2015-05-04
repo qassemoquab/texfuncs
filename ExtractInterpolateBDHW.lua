@@ -55,7 +55,7 @@ function ExtractInterpolate:updateGradInput(input, gradOutput)
 end
 
 function ExtractInterpolate:updateOutputCall(input, targety, targetx, y1, x1, y2, x2, y3, x3, y4, x4)
-   if self.inputSize==nil then
+   if self.inputSize==nil or ~self.cudaArray then
       self:initArray(input)
    else
       local _inputSize=input:size()
